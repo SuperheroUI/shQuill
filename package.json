@@ -11,8 +11,10 @@
   "scripts": {
     "clean": "rm -r ./bin",
     "test": "./node_modules/.bin/karma start",
+    "test:chrome": "node --max-old-space-size=8192 ./node_modules/karma/bin/karma start --browsers Chrome",
     "build": "./node_modules/.bin/webpack -p --config webpack.config.js",
     "dev": "./node_modules/.bin/webpack -d --watch --config webpack.config.js",
+    "server":"webpack-dev-server",
     "example": "./node_modules/.bin/webpack -d --watch --config webpack.example.config.js",
     "coveralls": "./node_modules/.bin/coveralls < ./bin/coverage/lcov/lcov.info"
   },
@@ -46,7 +48,8 @@
     "sh-form": "0.1.4",
     "style-loader": "0.13.1",
     "url-loader": "0.5.7",
-    "webpack": "1.4.13"
+    "webpack": "1.4.13",
+    "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
     "quill": "1.1.7",

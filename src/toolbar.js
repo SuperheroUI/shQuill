@@ -27,56 +27,74 @@ let defaultItems = [
         label: 'Formats', type: 'group', items: [
         {
             label: 'Font', type: 'font', items: [
-            {label: 'Sans Serif', value: 'sans-serif', selected: true},
-            {label: 'Serif', value: 'serif'},
-            {label: 'Monospace', value: 'monospace'}
-        ]
+                {label: 'Arial', value: 'Arial'},
+                {label: 'Calibri', value: 'Calibri'},
+                {label: 'Comic Sans MS', value: 'Comic Sans MS'},
+                {label: 'Georgia', value: 'Georgia'},
+                {label: 'Impact', value: 'Impact'},
+                {label: 'Monospace', value: 'monospace'},
+                {label: 'Sans Serif', value: 'sans-serif', selected: true},
+                {label: 'Serif', value: 'serif'},
+                {label: 'Tahoma', value: 'Tahoma'},
+                {label: 'Times New Roman', value: 'Times New Roman'},
+                {label: 'Verdana', value: 'Verdana'}
+            ]
         },
         {
             label: 'Size', type: 'size', items: [
-            {label: 'Small', value: '10px'},
-            {label: 'Normal', value: '13px', selected: true},
-            {label: 'Large', value: '18px'},
-            {label: 'Huge', value: '32px'}
+                {label: 'Small', value: '10px'},
+                {label: 'Normal', value: '13px', selected: true},
+                {label: 'Large', value: '18px'},
+                {label: 'Huge', value: '32px'}
+            ]
+        }
         ]
-        },
+    },
+    {
+        label: 'Text', type: 'group', items: [
+            {type: 'bold', label: 'Bold'},
+            {type: 'italic', label: 'Italic'},
+            {type: 'underline', label: 'Underline'},
+            {type: 'strike', label: 'Strike'}
+        ]
+    },
+    {
+        label: 'Align', type: 'group', items: [
         {
             label: 'Alignment', type: 'align', items: [
-            {label: '', value: '', selected: true},
-            {label: '', value: 'center'},
-            {label: '', value: 'right'},
-            {label: '', value: 'justify'}
-        ]
+                {label: '', value: '', selected: true},
+                {label: '', value: 'center'},
+                {label: '', value: 'right'},
+                {label: '', value: 'justify'}
+            ]
         }
     ]
     },
-
-    {
-        label: 'Text', type: 'group', items: [
-        {type: 'bold', label: 'Bold'},
-        {type: 'italic', label: 'Italic'},
-        {type: 'strike', label: 'Strike'},
-        {type: 'underline', label: 'Underline'},
-        {type: 'color', label: 'Color', items: defaultColors},
-        {type: 'background', label: 'Background color', items: defaultColors},
-        {type: 'link', label: 'Link'}
-    ]
-    },
-
     {
         label: 'Blocks', type: 'group', items: [
-        {type: 'list', value: 'bullet'},
-        {type: 'list', value: 'ordered'}
-    ]
+            {type: 'list', value: 'bullet'},
+            {type: 'list', value: 'ordered'},
+            {type: 'indent', value: '-1'},
+            {type: 'indent', value: '+1'}
+        ]
     },
-
     {
-        label: 'Blocks', type: 'group', items: [
-        {type: 'image', label: 'Image'},
-        {type: 'clean', label: 'Clean'}
-    ]
+        label: 'Colors', type: 'group', items: [   
+            {type: 'color', label: 'Color', items: defaultColors},
+            {type: 'background', label: 'Background color', items: defaultColors},
+        ]
+    },
+    {
+        label: 'Elements', type: 'group', items: [
+            {type: 'link', label: 'Link'},
+            {type: 'image', label: 'Image'}
+        ]
+    },
+    {
+        label: 'Remove', type: 'group', items: [
+            {type: 'clean', label: 'Clean'}
+        ]
     }
-
 ];
 
 let QuillToolbar = React.createClass({
