@@ -3,7 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>Example</title>
+    <style>
+        body {
+            color: #fff;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(#284D51, #304853) fixed !important;
+        }
+        #app {
+            height: 100%;
+            width: 50%;
+            padding: 20px;
 
+            box-sizing: border-box;
+            overflow: auto;
+        }
+        #sh-react-quill-editor {
+            margin-bottom: 20px;
+        }
+        ::-webkit-scrollbar-track {
+            display: none;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            border-radius: 3px;
+        }
+    </style>
 </head>
     <body>
         <div id="app"></div>
