@@ -9,5 +9,6 @@ notifications:
   email:
     recipients:
       - kbatchelor@insidesales.com
+      - csnelson@insidesales.com
     on_success: never
     on_failure: change
