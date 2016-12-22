@@ -5,7 +5,7 @@ module.exports = {
         global: false
     },
     entry: {
-        'sh-quill': './src/index.js',
+        'sh-quill': './src/sh-quill.js',
     },
 
     debug: true,
