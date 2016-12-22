@@ -3,16 +3,12 @@
   "version": "0.1.0",
   "description": "The Quill rich-text editor as a React component. Based on react-quill",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": ""
-  },
-  "main": "src/index.js",
+  "main": "bin/sh-quill.js",
   "scripts": {
     "clean": "rm -r ./bin",
     "test": "./node_modules/.bin/karma start",
     "test:chrome": "node --max-old-space-size=8192 ./node_modules/karma/bin/karma start --browsers Chrome",
-    "build": "./node_modules/.bin/webpack -p --config webpack.config.js",
+    "build": "./node_modules/.bin/webpack -d --config webpack.config.js",
     "dev": "./node_modules/.bin/webpack -d --watch --config webpack.config.js",
     "server":"webpack-dev-server",
     "example": "./node_modules/.bin/webpack -d --watch --config webpack.example.config.js",
@@ -34,16 +30,21 @@
     "babel-preset-react": "6.11.1",
     "jsdom": "7.0.1",
     "css-loader": "0.23.1",
+    "file-loader": "^0.8.5",
     "isparta-loader": "2.0.0",
     "jasmine-core": "2.4.1",
     "karma": "1.2.0",
+    "karma-chrome-launcher": "^2.0.0",
     "karma-cli": "1.0.1",
     "karma-coverage": "1.1.1",
     "karma-jasmine": "1.0.2",
     "karma-phantomjs-launcher": "1.0.1",
     "karma-webpack": "1.8.0",
+    "mocha": "^2.0.1",
+    "mocha-text-cov": "^0.1.0",
     "node-sass": "3.8.0",
     "phantomjs": "2.1.7",
+    "react-addons-test-utils": "^15.4.0",
     "sass-loader": "4.0.0",
     "sh-form": "0.1.4",
     "style-loader": "0.13.1",
@@ -53,8 +54,8 @@
   },
   "dependencies": {
     "quill": "1.1.7",
-    "react": "15.3.0",
-    "react-dom": "15.3.0",
+    "react": "15.4.0",
+    "react-dom": "15.4.0",
     "sh-core": "0.3.2"
   }
 }

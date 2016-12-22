@@ -11,7 +11,7 @@ class ShQuill extends React.Component {
         super(props);
         this.state = {
             classList: {
-                shRichTextEditor: true,
+                shQuill: true,
                 empty: true,
                 focused: false,
                 showRequired: false,
@@ -74,7 +74,7 @@ class ShQuill extends React.Component {
             this.setState(
                 {
                     classList: {
-                        shRichTextEditor: true,
+                        shQuill: true,
                         showRequired: this.props.required,
                         empty: isEmpty,
                         prompt: isEmpty
@@ -190,7 +190,7 @@ class ShQuill extends React.Component {
             <div id="react-quill-editor"
                  className={this.props.className ? ShCore.getClassNames(this.state.classList) + ' ' + this.props.className : ShCore.getClassNames(this.state.classList)}>
                 <ReactQuill ref="quill"
-                            className="sh-quill"
+                            className="react-quill"
                             theme="snow"
                             bounds={".quill-contents"}
                             modules={quillModules}

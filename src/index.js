@@ -9,6 +9,4 @@ quill.register(FontStyle, true);
 quill.register(FontFamilyStyle, true);
 module.exports.Quill = quill;
 
-require('quill/dist/quill.core.css');
-require('quill/dist/quill.snow.css');
 

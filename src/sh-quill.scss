@@ -28,6 +28,7 @@
 
         .required-label {
             float: right;
+            padding-right: 27px;
             font-size: $size-font-small;
             text-transform: uppercase;
             opacity: 0;
@@ -45,7 +46,7 @@
     &.prompt {
         .quill-contents:before {
             position: absolute;
-            top: 25px;
+            top: 20px;
             left: 5px;
             color: $color-primary;
             font-weight: $font-weight-bold;

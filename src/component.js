@@ -238,7 +238,7 @@ let QuillComponent = React.createClass({
         contents.push(editor ? editor : React.DOM.div({
             key: 'editor-' + Math.random(),
             ref: 'editor',
-            className: 'sh-quill-contents',
+            className: 'quill-contents',
             dangerouslySetInnerHTML: { __html:this.getEditorContents() }
         }));
 
@@ -249,7 +249,7 @@ let QuillComponent = React.createClass({
         return React.DOM.div({
             id: this.props.id,
             style: this.props.style,
-            className: ['sh-quill'].concat(this.props.className).join(' '),
+            className: ['quill'].concat(this.props.className).join(' '),
             onKeyPress: this.props.onKeyPress,
             onKeyDown: this.props.onKeyDown,
             onKeyUp: this.props.onKeyUp,

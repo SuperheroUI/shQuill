@@ -19,7 +19,7 @@ describe('root', function () {
         };
         var root = TestUtils.renderIntoDocument(<ShQuill value={value} onChange={changeMe} />);
         let rootNode = ReactDOM.findDOMNode(root);
-        let input = TestUtils.findRenderedDOMComponentWithClass(root, 'sh-quill');
+        let input = TestUtils.findRenderedDOMComponentWithClass(root, 'react-quill');
         root.handleChange({target:{value:2}});
 
         TestUtils.Simulate.blur(input);
@@ -85,7 +85,7 @@ describe('root', function () {
             value = newVal;
         };
         var root = TestUtils.renderIntoDocument(<ShQuill value={value} onChange={changeMe} />);
-        let input = TestUtils.findRenderedDOMComponentWithClass(root, 'sh-quill');
+        let input = TestUtils.findRenderedDOMComponentWithClass(root, 'react-quill');
 
         TestUtils.Simulate.focus(input);
     });
@@ -96,7 +96,7 @@ describe('root', function () {
             value = newVal;
         };
         var root = TestUtils.renderIntoDocument(<ShQuill value={value} onChange={changeMe} />);
-        let input = TestUtils.findRenderedDOMComponentWithClass(root, 'sh-quill');
+        let input = TestUtils.findRenderedDOMComponentWithClass(root, 'react-quill');
         expect(value).toBe('1');
         root.clearText();           // We have to "cheat" here because Quill doesn't handle keyUp events sent through React TestUtils
         root.handleKeyUp({key: 'Backspace'});
@@ -109,7 +109,7 @@ describe('root', function () {
             value = newVal;
         };
         var root = TestUtils.renderIntoDocument(<ShQuill value={value} required onChange={changeMe} />);
-        let input = TestUtils.findRenderedDOMComponentWithClass(root, 'sh-quill');
+        let input = TestUtils.findRenderedDOMComponentWithClass(root, 'react-quill');
         expect(value).toBe('1');
         root.clearText();           // We have to "cheat" here because Quill doesn't handle keyUp events sent through React TestUtils
         root.handleKeyUp({key: 'Backspace'});
@@ -124,7 +124,7 @@ describe('root', function () {
         var root = TestUtils.renderIntoDocument(<ShQuill required value={value} onChange={changeMe} />);
         let rootNode = ReactDOM.findDOMNode(root);
         expect(root.state).toBeTruthy();
-        let input = TestUtils.findRenderedDOMComponentWithClass(root, 'sh-quill');
+        let input = TestUtils.findRenderedDOMComponentWithClass(root, 'react-quill');
         expect(root.state.classList.showRequired).toBe(true);
     });
 
@@ -138,7 +138,7 @@ describe('root', function () {
         let input = TestUtils.findRenderedDOMComponentWithClass(root, 'quill-contents');
         TestUtils.Simulate.focus(input);
         TestUtils.Simulate.blur(input);
-        input = TestUtils.findRenderedDOMComponentWithClass(root, 'sh-quill');
+        input = TestUtils.findRenderedDOMComponentWithClass(root, 'react-quill');
         expect(root.state.classList.showRequired).toBe(false);
     });
 
@@ -148,7 +148,7 @@ describe('root', function () {
             value = newVal;
         };
         var root = TestUtils.renderIntoDocument(<ShQuill value={value} onChange={changeMe} />);
-        let input = TestUtils.findRenderedDOMComponentWithClass(root, 'sh-quill');
+        let input = TestUtils.findRenderedDOMComponentWithClass(root, 'react-quill');
         expect(root.validate().isValid).toBe(true);
     });
 
@@ -158,7 +158,7 @@ describe('root', function () {
             value = newVal;
         };
         var root = TestUtils.renderIntoDocument(<ShQuill value={value} onChange={changeMe} required />);
-        let input = TestUtils.findRenderedDOMComponentWithClass(root, 'sh-quill');
+        let input = TestUtils.findRenderedDOMComponentWithClass(root, 'react-quill');
         expect(root.validate().isValid).toBe(false);
     });
 
@@ -172,7 +172,7 @@ describe('root', function () {
         };
         spyOn(validator, 'register');
         var root = TestUtils.renderIntoDocument(<ShQuill validator={validator} value={value} onChange={changeMe} required />);
-        let input = TestUtils.findRenderedDOMComponentWithClass(root, 'sh-quill');
+        let input = TestUtils.findRenderedDOMComponentWithClass(root, 'react-quill');
         expect(validator.register).toHaveBeenCalled();
     });
 
@@ -287,7 +287,7 @@ describe('root', function () {
             blurMe: _.noop
         };
         var root = TestUtils.renderIntoDocument(<ShQuill value={value} onChange={callbacks.changeMe} onFocus={callbacks.focusMe} />);
-        let input = TestUtils.findRenderedDOMComponentWithClass(root, 'sh-quill');
+        let input = TestUtils.findRenderedDOMComponentWithClass(root, 'react-quill');
         spyOn(callbacks, 'focusMe');
         root.handleComponentFocus();
         TestUtils.Simulate.focus(input);
@@ -301,7 +301,7 @@ describe('root', function () {
             blurMe: _.noop
         };
         var root = TestUtils.renderIntoDocument(<ShQuill value={value} onChange={callbacks.changeMe} onBlur={callbacks.blurMe} />);
-        let input = TestUtils.findRenderedDOMComponentWithClass(root, 'sh-quill');
+        let input = TestUtils.findRenderedDOMComponentWithClass(root, 'react-quill');
         spyOn(callbacks, 'blurMe');
         root.handleComponentBlur();
         TestUtils.Simulate.blur(input);

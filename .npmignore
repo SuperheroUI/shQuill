@@ -4,9 +4,6 @@ node_modules
 .idea/
 *.iml
 .gitignore
-test
-quill
-demo
 /bin/example.*
 /bin/coverage
 
