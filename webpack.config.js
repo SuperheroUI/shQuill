@@ -1,13 +1,11 @@
-'use strict';
 let path = require('path');
-let webpack = require('webpack');
 
 module.exports = {
     node: {
         global: false
     },
     entry: {
-        'sh-react-quill': './src/index.js',
+        'sh-quill': './src/index.js',
     },
 
     debug: true,

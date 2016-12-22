@@ -1,17 +1,13 @@
 {
   "name": "sh-quill",
-  "version": "0.0.1",
+  "version": "0.0.51",
   "description": "The Quill rich-text editor as a React component. Based on react-quill",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": ""
-  },
-  "main": "src/index.js",
+  "main": "bin/sh-quill.js",
   "scripts": {
     "clean": "rm -r ./bin",
     "test": "./node_modules/.bin/karma start",
-    "build": "./node_modules/.bin/webpack -p --config webpack.config.js",
+    "build": "./node_modules/.bin/webpack -d --config webpack.config.js",
     "dev": "./node_modules/.bin/webpack -d --watch --config webpack.config.js",
     "example": "./node_modules/.bin/webpack -d --watch --config webpack.example.config.js",
     "coveralls": "./node_modules/.bin/coveralls < ./bin/coverage/lcov/lcov.info"

@@ -1,5 +1,5 @@
 'use strict';
-
+require('./sh-quill.scss');
 let React = require('react'),
     ReactDOM = require('react-dom'),
     QuillToolbar = require('./toolbar'),
