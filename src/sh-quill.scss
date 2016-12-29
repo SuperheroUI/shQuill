@@ -3,9 +3,13 @@
 .sh-quill {
     border-radius: $size-border-radius-small;
     min-width: 380px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 
     .ql-snow.ql-toolbar {
         border: 0;
+        flex: 0 0 0;
 
         .ql-formats {
             .ql-picker {
@@ -109,15 +113,19 @@
         position: relative;
         border: 0;
         border-radius: $size-border-radius-small;
-        min-height: 200px;
         width: 100%;
+        height: 100%;
         overflow-y: visible;
         padding: 0;
         outline: 0;
+        color: $color-box-dark-background;
+        flex: 10 0 0;
 
         .ql-editor {
+            height: initial;;
             padding: 18px 12px 0 6px;
             background-color: $color-box-background !important;
+            border-radius: $size-border-radius-small;
 
             ::-webkit-scrollbar-track {
                 display: none;
