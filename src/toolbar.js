@@ -27,9 +27,14 @@ let defaultItems = [
         label: 'Formats', type: 'group', items: [
         {
             label: 'Font', type: 'font', items: [
-            {label: 'Sans Serif', value: 'sans-serif', selected: true},
-            {label: 'Serif', value: 'serif'},
-            {label: 'Monospace', value: 'monospace'}
+            {label: 'Arial', value: 'Arial, sans-serif'},
+            {label: 'Comic Sans MS', value: 'Comic Sans MS, cursive'},
+            {label: 'Georgia', value: 'Georgia, serif'},
+            {label: 'Impact', value: 'Impact, sans-serif'},
+            {label: 'Tahoma', value: 'Tahoma, sans-serif'},
+            {label: 'Verdana', value: 'Verdana, sans-serif'},
+            {label: 'Calibri', value: 'Calibri, san-serif'},
+            {label: 'Times New Roman', value: 'Times New Roman, serif'}
         ]
         },
         {
@@ -52,7 +57,7 @@ let defaultItems = [
     },
 
     {
-        label: 'Text', type: 'group', items: [
+        label: 'Text', type: 'group', class: 'addthis', items: [
         {type: 'bold', label: 'Bold'},
         {type: 'italic', label: 'Italic'},
         {type: 'strike', label: 'Strike'},

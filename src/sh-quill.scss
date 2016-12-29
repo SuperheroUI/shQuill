@@ -1,5 +1,212 @@
 @import '../node_modules/sh-core/src/base';
 
-.sh-quill{
-  // add our styles here
+.sh-quill {
+    border-radius: $size-border-radius-small;
+    min-width: 380px;
+
+    .ql-snow.ql-toolbar {
+        border: 0;
+
+        .ql-formats {
+            .ql-picker {
+                .ql-picker-options {
+                    .ql-picker-item.ql-selected {
+                        color: $color-primary !important;
+                    }
+
+                    .ql-picker-item:hover {
+                        color: $color-primary !important;
+                    }
+                }
+            }
+
+            .ql-picker-label.ql-active {
+                color: $color-primary !important;
+            }
+
+            .ql-picker-label:hover, .ql-picker-label.ql-active {
+                svg {
+                    .ql-stroke {
+                        stroke: $color-primary;
+                    }
+                }
+            }
+        }
+
+        .ql-active {
+            svg {
+                .ql-stroke {
+                    stroke: $color-primary;
+                }
+            }
+        }
+
+        button:hover {
+            color: $color-primary;
+            stroke: $color-primary;
+            svg {
+                .ql-stroke {
+                    stroke: $color-primary;
+                }
+            }
+        }
+
+        color: $color-box-dark-background2;
+        background: rgba($colorToolTipBackground, 0.98);
+        padding: 2px;
+        margin-bottom: 5px;
+        border-radius: $size-border-radius-small;
+
+        button .ql-stroke {
+            stroke: $color-box-dark-background2;
+        }
+
+        button:hover .ql-stroke {
+            color: black;
+        }
+
+        button .ql-fill {
+            fill: $color-box-dark-background2;
+        }
+
+        button:hover .ql-fill {
+            fill: black;
+        }
+
+        .ql-picker-label {
+            &:hover {
+                color: black;
+
+                ::before {
+                    color: black;
+                }
+            }
+
+        }
+
+        .ql-picker.ql-font {
+            width: 160px;
+        }
+
+        .ql-picker.ql-size {
+            width: 90px;
+        }
+
+    }
+
+    .ql-toolbar.ql-snow {
+        .ql-formats {
+            margin-right: 7px;
+        }
+    }
+
+    .ql-container.ql-snow {
+        border: 0;
+        background-color: $color-box-background;
+    }
+
+    .sh-quill-contents {
+        position: relative;
+        border: 0;
+        border-radius: $size-border-radius-small;
+        min-height: 200px;
+        width: 100%;
+        overflow-y: visible;
+        padding: 0;
+        outline: 0;
+
+        .ql-editor {
+            padding: 18px 12px 0 6px;
+            background-color: $color-box-background !important;
+
+            ::-webkit-scrollbar-track {
+                display: none;
+            }
+
+            ::-webkit-scrollbar-thumb {
+                border-radius: 3px;
+                background-color: $color-box-background3;
+            }
+
+            .ql-font-arial {
+                font-family: Arial, sans-serif;
+            }
+
+            li {
+                display: list-item;
+            }
+
+            ol {
+                display: list-item;
+            }
+        }
+    }
+
+    &.sm {
+        .ql-toolbar {
+            .ql-picker-label {
+                padding: 0;
+            }
+
+            .ql-image {
+                display: none;
+            }
+
+            .ql-strike {
+                display: none;
+            }
+
+            .ql-color-picker {
+                display: none;
+            }
+
+            .ql-font.ql-picker {
+                .ql-picker-label {
+                    width: 86px !important;
+                }
+            }
+
+            .ql-formats {
+                margin: 0;
+            }
+
+            .ql-picker.ql-size {
+                margin-left: -69px;
+                width: 70px;
+
+                .ql-picker-label {
+                    width: 70px;
+                }
+            }
+
+            .ql-align {
+                margin-left: 0px;
+
+                .ql-picker-label {
+                    svg {
+                        height: 15px;
+                        position: absolute;
+                        top: 4px;
+                        right: 4px;
+                    }
+                }
+
+                button {
+                    width: 24px !important;
+                    padding: 0;
+                }
+            }
+
+            .ql-formats:nth-child(2), .ql-formats:nth-child(3), .ql-formats:nth-child(4) {
+                margin-left: 0;
+                svg {
+                    height: 15px;
+                }
+                button {
+                    width: 24px !important;
+                    padding: 0;
+                }
+            }
+        }
+    }
 }

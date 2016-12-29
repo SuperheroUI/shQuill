@@ -5,8 +5,8 @@ import ShQuill from '../bin/sh-quill'
 class App extends React.Component {
     render() {
         return (
-            <div>
-                <ShQuill/>
+            <div className="example">
+                <ShQuill className="sm"/>
             </div>
         )
     }
