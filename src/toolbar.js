@@ -28,19 +28,19 @@ let defaultItems = [
         {
             label: 'Font', type: 'font', items: [
             {label: 'Arial', value: 'Arial, sans-serif'},
-            {label: 'Comic Sans MS', value: 'Comic Sans MS, cursive'},
+            {label: 'Comic Sans MS', value: '"Comic Sans MS", cursive, sans-serif'},
             {label: 'Georgia', value: 'Georgia, serif'},
             {label: 'Impact', value: 'Impact, sans-serif'},
             {label: 'Tahoma', value: 'Tahoma, sans-serif'},
             {label: 'Verdana', value: 'Verdana, sans-serif'},
             {label: 'Calibri', value: 'Calibri, san-serif'},
-            {label: 'Times New Roman', value: 'Times New Roman, serif'}
+            {label: 'Times New Roman', value: '"Times New Roman", Times, serif'}
         ]
         },
         {
             label: 'Size', type: 'size', items: [
             {label: 'Small', value: '10px'},
-            {label: 'Normal', value: '13px', selected: true},
+            {label: 'Normal', value: '13px'},
             {label: 'Large', value: '18px'},
             {label: 'Huge', value: '32px'}
         ]
