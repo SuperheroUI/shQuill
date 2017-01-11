@@ -105,6 +105,11 @@
                     display: list-item;
                 }
             }
+
+            .ql-out-bottom,
+            .ql-out-top {
+                visibility: visible;
+            }
         }
     }
 

@@ -12,10 +12,6 @@ class App extends React.Component {
 
     }
     render() {
-        setTimeout(() => {
-            this.setState({reason:'<div>loaded</div>'})
-        }, 500);
-
         return (
             <div className="example">
                 <ShQuill className="sm" value={this.state.reason}/>
