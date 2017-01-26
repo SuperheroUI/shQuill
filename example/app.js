@@ -15,7 +15,7 @@ class App extends React.Component {
         return (
             <div className="">
             <div className="example">
-                <ShQuill className="" value={this.state.reason}/>
+                <ShQuill className="sm" value={this.state.reason}/>
             </div>
             <button>test</button>
             </div>
