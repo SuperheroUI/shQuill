@@ -121,7 +121,11 @@ let QuillComponent = React.createClass({
             fontOptions[i].style.fontFamily = fontOptions[i].dataset.value;
         }
 
-        this.setState({ editor:editor });
+        this.setState({ editor:editor }, () => {
+            if (this.props.value) {
+                this.setEditorContents(editor, this.props.value);
+            }
+        });
     },
 
     componentWillUnmount: function() {
