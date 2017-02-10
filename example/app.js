@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom';
-import ShQuill from '../bin/sh-quill'
+import ShQuill from '../src/index'
 
 class App extends React.Component {
     constructor(props) {
