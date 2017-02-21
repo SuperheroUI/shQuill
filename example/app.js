@@ -6,20 +6,27 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            reason: '<div>beginning text</div>'
+            value: '<div>beginning text</div>'
         };
 
         this.handleChange = this.handleChange.bind(this);
+        this.updateValue = this.updateValue.bind(this);
     }
 
-    handleChange() {
+    handleChange(value) {
         this.setState({
-            reason: `<ul>
-                <li>one</li>
-                <li>two</li>
-                <li>three</li>
-                <li>four</li>
-                        </ul>`
+            value: value
+        })
+    }
+
+    updateValue() {
+        this.setState({
+            value: `<ul>
+                        <li>one</li>
+                        <li>two</li>
+                        <li>three</li>
+                        <li>four</li>
+                      </ul>`
         })
     }
 
@@ -27,9 +34,10 @@ class App extends React.Component {
         return (
             <div className="">
                 <div className="example">
-                    <ShQuill value={this.state.reason} insertImageWithUrl={true}/>
+                    <ShQuill className="sm" value={this.state.value} onChange={this.handleChange} insertImageWithUrl={true}/>
                 </div>
-                <button onClick={this.handleChange}>test</button>
+                <button onClick={this.updateValue}>Update Value</button>
+                <p>{this.state.value}</p>
             </div>
         )
     }
