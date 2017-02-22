@@ -71,9 +71,13 @@ let QuillMixin = {
      * @param  {String} url    URL of image
      * @param  {Object} range  A Quill range, e.g. {index: 0, length: 10}
      */
-    insertEmbededImageByUrl: function(editor, url, range) {
+    insertEmbededImageByUrl: function(editor, url, height, width, range) {
         let index = range && range.index ? range.index : 0;
-        editor.insertEmbed(index, 'image', url, 'user');
+        editor.insertEmbed(index, 'image', {
+            url: url,
+            height: height,
+            width: width
+        }, 'user');
     },
 
     /*

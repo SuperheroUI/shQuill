@@ -38,7 +38,8 @@ let QuillComponent = React.createClass({
         onKeyDown: T.func,
         onKeyUp: T.func,
         onChange: T.func,
-        onChangeSelection: T.func
+        onChangeSelection: T.func,
+        config: T.object
     },
 
     /*
@@ -59,7 +60,10 @@ let QuillComponent = React.createClass({
         return {
             className: '',
             theme: 'snow',
-            modules: {}
+            modules: {},
+            config: {
+                insertImageWithUrl: false
+            }
         };
     },
 
@@ -190,7 +194,7 @@ let QuillComponent = React.createClass({
 
         config.modules.toolbar = this.props.toolbar && typeof(this.props.toolbar) === 'object' ? this.props.toolbar : defaultToolbar;
 
-        if (this.props.insertImageWithUrl === true) {
+        if (this.props.config.insertImageWithUrl === true) {
             let toolbarHandlers = Object.assign({}, config.modules.toolbar.handlers, {image: this.imageHandler});
             config.modules.toolbar.handlers = toolbarHandlers;
         }
@@ -231,9 +235,9 @@ let QuillComponent = React.createClass({
      * @param  {String} url   URL of an image
      * @param  {Object} range  A Quill range, e.g. {index: 0, length: 10}
      */
-    insertImage: function(url, range) {
+    insertImage: function(url, height, width, range) {
         if (this.state.editor) {
-          this.insertEmbededImageByUrl(this.state.editor, url, range);
+          this.insertEmbededImageByUrl(this.state.editor, url, height, width, range);
           this.refs.insertImageWithUrl.setState({hidden: true});
         }
     },
@@ -250,7 +254,7 @@ let QuillComponent = React.createClass({
         );
 
         // Add some additional UI to accept an image URL
-        if (this.props.insertImageWithUrl === true) {
+        if (this.props.config.insertImageWithUrl === true) {
             let insertImageWithUrl = find(children, function(child) {
                 return child.ref === 'insertImageWithUrl';
             });

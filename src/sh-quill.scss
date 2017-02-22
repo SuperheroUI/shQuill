@@ -139,18 +139,12 @@
                 color: $color-primary;
             }
         }
-        
+
         &.insert-image-by-url {
           position: absolute;
           top: 27px;
           z-index: 1;
           font-size: 13px;
-
-          &:before {
-              content: "Insert Image by URL:";
-              line-height: 26px;
-              margin-right: 8px;
-          }
 
           input {
             margin-right: 16px;
