@@ -1,9 +1,13 @@
 {
   "name": "sh-quill",
-  "version": "0.0.71",
+  "version": "0.0.72",
   "description": "The Quill rich-text editor as a React component. Based on react-quill",
   "license": "MIT",
   "main": "./bin/sh-quill.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SuperheroUI/shQuill"
+  },
   "scripts": {
     "lint": "sass-lint --config .sass-lint.yml --verbose --no-exit",
     "clean": "rm -r ./bin",

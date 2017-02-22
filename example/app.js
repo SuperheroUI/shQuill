@@ -34,7 +34,13 @@ class App extends React.Component {
         return (
             <div className="">
                 <div className="example">
-                    <ShQuill className="sm" value={this.state.value} onChange={this.handleChange}/>
+                    <ShQuill
+                      value={this.state.value}
+                      onChange={this.handleChange}
+                      config={{
+                        insertImageWithUrl: true
+                      }}
+                      />
                 </div>
                 <button onClick={this.updateValue}>Update Value</button>
                 <p>{this.state.value}</p>

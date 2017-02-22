@@ -2,12 +2,9 @@
 
 let React = require('react'),
     ReactDOM = require('react-dom'),
-    QuillToolbar = require('./toolbar'),
     QuillMixin = require('./mixin'),
+    InsertImageWithUrl = require('./insert-image-with-url'),
     T = React.PropTypes;
-
-// FIXME: Remove with the switch to JSX
-QuillToolbar = React.createFactory(QuillToolbar);
 
 let find = function(arr, predicate) {
     if (!arr) {
@@ -32,7 +29,7 @@ let QuillComponent = React.createClass({
         placeholder: T.string,
         readOnly: T.bool,
         modules: T.object,
-        toolbar: T.oneOfType([ T.array, T.oneOf([false]), ]), // deprecated for v1.0.0, use toolbar module
+        toolbar: T.object,
         formats: T.array,
         styles: T.oneOfType([ T.object, T.oneOf([false]) ]),
         theme: T.string,
@@ -41,7 +38,8 @@ let QuillComponent = React.createClass({
         onKeyDown: T.func,
         onKeyUp: T.func,
         onChange: T.func,
-        onChangeSelection: T.func
+        onChangeSelection: T.func,
+        config: T.object
     },
 
     /*
@@ -62,7 +60,10 @@ let QuillComponent = React.createClass({
         return {
             className: '',
             theme: 'snow',
-            modules: {}
+            modules: {},
+            config: {
+                insertImageWithUrl: false
+            }
         };
     },
 
@@ -115,8 +116,8 @@ let QuillComponent = React.createClass({
             this.getEditorElement(),
             this.getEditorConfig());
 
-        // this.setCustomFormats(editor); // deprecated in Quill v1.0
-        let fontOptions = document.querySelectorAll('.quill-toolbar .ql-font.ql-picker .ql-picker-item');
+        // Style the font options to match their font family
+        let fontOptions = document.querySelectorAll('.ql-toolbar .ql-font.ql-picker .ql-picker-item');
         for (let i=0; i<fontOptions.length; ++i) {
             fontOptions[i].style.fontFamily = fontOptions[i].dataset.value;
         }
@@ -158,20 +159,6 @@ let QuillComponent = React.createClass({
         this.componentDidMount();
     },
 
-    /**
-     * @deprecated v1.0.0
-     */
-    setCustomFormats: function (editor) {
-        if (!this.props.formats) {
-            return;
-        }
-
-        for (let i = 0; i < this.props.formats.length; i++) {
-            let format = this.props.formats[i];
-            editor.addFormat(format.name || format, format);
-        }
-    },
-
     getEditorConfig: function() {
         let config = {
             readOnly:     this.props.readOnly,
@@ -183,19 +170,47 @@ let QuillComponent = React.createClass({
             bounds:       this.props.bounds,
             placeholder:  this.props.placeholder,
         };
-        // Unless we're redefining the toolbar, or it has been explicitly
-        // disabled, attach to the default one as a ref.
-        // Note: Toolbar should be configured as a module for Quill v1.0.0 and above
-        // Pass toolbar={false} for versions >1.0
-        if (this.props.toolbar !== false && !config.modules.toolbar) {
-            // Don't mutate the original modules
-            // because it's shared between components.
-            config.modules = JSON.parse(JSON.stringify(config.modules));
-            config.modules.toolbar = {
-                container: ReactDOM.findDOMNode(this.refs.toolbar)
-            }
+
+        // If no toolbar is passed in as a prop, use these default settings
+        let defaultToolbar = {
+          container: [
+              [{'font': [
+                  'Arial',
+                  'Comic Sans MS',
+                  'Georgia',
+                  'Impact',
+                  'Tahoma',
+                  'Verdana',
+                  'Calibri',
+                  'Times New Roman'
+              ]}],
+              [{'size': [] }],
+              [{'align': []}],
+              ['bold', 'italic', 'strike', 'underline', {'color': []}, {'background': []}, 'link'],
+              [{'list': 'bullet'}, {'list': 'ordered'}],
+              ['image', 'clean']
+          ]
+        };
+
+        config.modules.toolbar = this.props.toolbar && typeof(this.props.toolbar) === 'object' ? this.props.toolbar : defaultToolbar;
+
+        if (this.props.config.insertImageWithUrl === true) {
+            let toolbarHandlers = Object.assign({}, config.modules.toolbar.handlers, {image: this.imageHandler});
+            config.modules.toolbar.handlers = toolbarHandlers;
         }
+
         return config;
+    },
+
+    /**
+     * Override default image button behavior by prompting for a URL instead of a local file
+     */
+    imageHandler: function() {
+      let editor = this.getEditor();
+      this.refs.insertImageWithUrl.setState({
+          hidden: false,
+          editorSelection: editor.getSelection()
+      });
     },
 
     getEditor: function() {
@@ -214,6 +229,19 @@ let QuillComponent = React.createClass({
         return this.state.selection;
     },
 
+    /**
+     * Insert an image by URL and hide prompt to insert image by URL.
+     *
+     * @param  {String} url   URL of an image
+     * @param  {Object} range  A Quill range, e.g. {index: 0, length: 10}
+     */
+    insertImage: function(url, height, width, range) {
+        if (this.state.editor) {
+          this.insertEmbededImageByUrl(this.state.editor, url, height, width, range);
+          this.refs.insertImageWithUrl.setState({hidden: true});
+        }
+    },
+
     /*
     Renders either the specified contents, or a default
     configuration of toolbar and contents area.
@@ -225,15 +253,12 @@ let QuillComponent = React.createClass({
             function(c) { return React.cloneElement(c, {ref: c.ref}); }
         );
 
-        if (this.props.toolbar !== false) {
-            let toolbar = find(children, function(child) {
-                return child.ref === 'toolbar';
+        // Add some additional UI to accept an image URL
+        if (this.props.config.insertImageWithUrl === true) {
+            let insertImageWithUrl = find(children, function(child) {
+                return child.ref === 'insertImageWithUrl';
             });
-            contents.push(toolbar ? toolbar : QuillToolbar({
-                key: 'toolbar-' + Math.random(),
-                ref: 'toolbar',
-                items: this.props.toolbar
-            }))
+            contents.push(insertImageWithUrl ? insertImageWithUrl : <InsertImageWithUrl ref='insertImageWithUrl' onInsert={this.insertImage} />);
         }
 
         let editor = find(children, function(child) {
