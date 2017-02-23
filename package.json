@@ -1,6 +1,6 @@
 {
   "name": "sh-quill",
-  "version": "0.0.73",
+  "version": "0.0.74",
   "description": "The Quill rich-text editor as a React component. Based on react-quill",
   "license": "MIT",
   "main": "./bin/sh-quill.js",
