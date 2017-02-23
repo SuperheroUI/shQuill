@@ -33,13 +33,16 @@
                     &.ql-font {
                         width: 160px;
 
-                        .ql-picker-options {
                           .ql-picker-item, .ql-picker-label {
                             &:before {
-                              content: attr(data-value);
+                              content: 'Sans Serif';
+                            }
+                            &[data-value] {
+                              &:before {
+                                content: attr(data-value);
+                              }
                             }
                           }
-                        }
                     }
 
                     &.ql-size {
@@ -134,8 +137,10 @@
             border: 0;
             border-radius: 0 0 2px 2px;
             box-shadow: 5px 7px 5px $color-box-dark-background3;
+            font-size: 13px;
 
             a {
+                font-size: 13px;
                 color: $color-primary;
             }
         }

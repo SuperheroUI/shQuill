@@ -31,8 +31,8 @@ class InsertImageWithUrl extends Component {
         return (
           <div style={{display: this.state.hidden ? 'none' : 'block'}} className='insert-image-by-url ql-snow ql-toolbar ql-tooltip'>
             URL: <input ref='url' placeholder='Required' onKeyPress={this.handleKeyPress.bind(this)} />
-            Height (px): <input ref='height' size="5" placeholder='Optional' onKeyPress={this.handleKeyPress.bind(this)}/>
-            Width (px): <input ref='width' size="5" placeholder='Optional' onKeyPress={this.handleKeyPress.bind(this)}/>
+            Height (px): <input ref='height' size="6" placeholder='Optional' onKeyPress={this.handleKeyPress.bind(this)}/>
+            Width (px): <input ref='width' size="6" placeholder='Optional' onKeyPress={this.handleKeyPress.bind(this)}/>
             <a className='ql-action' onClick={this.insertImage.bind(this)}>Insert</a>
           </div>
         );
