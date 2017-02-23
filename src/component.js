@@ -174,7 +174,8 @@ let QuillComponent = React.createClass({
         // If no toolbar is passed in as a prop, use these default settings
         let defaultToolbar = {
           container: [
-              [{'font': [
+              [
+                {'font': [
                   'Arial',
                   'Comic Sans MS',
                   'Georgia',
@@ -183,9 +184,10 @@ let QuillComponent = React.createClass({
                   'Verdana',
                   'Calibri',
                   'Times New Roman'
-              ]}],
-              [{'size': [] }],
-              [{'align': []}],
+                ]},
+                {'size': [] },
+                {'align': []}
+              ],
               ['bold', 'italic', 'strike', 'underline', {'color': []}, {'background': []}, 'link'],
               [{'list': 'bullet'}, {'list': 'ordered'}],
               ['image', 'clean']
