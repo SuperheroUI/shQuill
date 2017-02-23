@@ -185,7 +185,7 @@ let QuillComponent = React.createClass({
                   'Calibri',
                   'Times New Roman'
                 ]},
-                {'size': [] },
+                {'size': ['small', 'normal', 'large', 'huge'] },
                 {'align': []}
               ],
               ['bold', 'italic', 'strike', 'underline', {'color': []}, {'background': []}, 'link'],
