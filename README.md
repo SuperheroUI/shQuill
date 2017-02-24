@@ -1,4 +1,4 @@
-React-Quill ![](https://travis-ci.org/SuperheroUI/shQuill.svg?branch=master)
+Sh-Quill ![](https://travis-ci.org/SuperheroUI/shQuill.svg?branch=master)
 ==============================================================================
 
 A [Quill] component for [React].
@@ -7,7 +7,7 @@ See the [live demo].
 
 [Quill]: https://quilljs.com
 [React]: https://facebook.github.io/react/
-[live demo]: https://superheroui.github.io/
+[live demo]: https://superheroui.github.io/#ShQuill
 
   1. [Quick start](#quick-start)
   2. [Styles and themes](#styles-and-themes)
@@ -19,157 +19,39 @@ See the [live demo].
 Quick start
 -----------
 1. Use straight away:
+    
+    See the github page's [live demo] for quick start code examples 
 
-    ~~~jsx
-    var React = require('react');
-    var ReactQuill = require('react-quill');
-
-    var MyComponent = React.createClass({
-      /* ... */
-
-      render: function() {
-        return (
-          <ReactQuill value={this.state.value} />
-        );
-      }
-    });
-    ~~~
-
-2. Bind to the `onChange` event and customize a few settings:
-
-    ~~~jsx
-    /*
-    Include `quill.snow.css` to use the editor's standard theme. For example,
-    depending on the structure of your app, you could do something like this:
-
-    <link rel="stylesheet" href="../node_modules/react-quill/dist/quill.snow.css">
-    */
-
-    var MyComponent = React.createClass({
-      /* ... */
-
-      onTextChange: function(value) {
-        this.setState({ text:value });
-      },
-
-      render: function() {
-        return (
-          <ReactQuill theme="snow"
-                      value={this.state.text}
-                      onChange={this.onTextChange} />
-        );
-      }
-    });
-    ~~~
-
-3. Custom controls:
-
-    ~~~jsx
-    var MyComponent = React.createClass({
-      /* ... */
-
-      render: function() {
-        return (
-          <ReactQuill>
-            <ReactQuill.Toolbar key="toolbar"
-                                ref="toolbar"
-                                items={ReactQuill.Toolbar.defaultItems} />
-            <div key="editor"
-                 ref="editor"
-                 className="quill-contents"
-                 dangerouslySetInnerHTML={{__html:this.getEditorContents()}} />
-          </ReactQuill>
-        );
-      }
-    });
-    ~~~
+    
 
 ### Using with Quill 1.0
 
 If using Quill >1.0.0 as a dependency, the toolbar should be configured directly through the Quill module API rather than through the React-Quill wrapper. 
 
-- Pass `toolbar={false}` as a prop to `ReactQuill` and remove the `ReactQuill.Toolbar` JSX element
+- Pass `toolbar={false}` as a prop to `ShQuill` and remove the `ShQuill.Toolbar` JSX element
 - [Quill Toolbar Module Docs (Beta)](http://beta.quilljs.com/docs/modules/toolbar/)
 
-#### Example
 
-~~~jsx
-var MyComponent = React.createClass({
-  /* ... */
-
-  _quillModules: {
-      toolbar: [ 
-          [{ 'header': [1, 2, false] }],
-          ['bold', 'italic', 'underline','strike', 'blockquote'],
-          [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}], 
-          ['link', 'image'], 
-          ['clean'] 
-      ]
-      /* ... other modules */
-  },
-
-  _quillFormats: [ 
-      "header",
-      "bold", "italic", "underline", "strike", "blockquote",
-      "list", "bullet", "indent",
-      "link", "image" 
-  ],
-  
-  render: function() {
-    return (
-      <div className='_quill'>
-        <ReactQuill theme='snow' 
-                    modules={this._quillModules}
-                    formats={this._quillFormats}
-                    toolbar={false} // Let Quill manage toolbar
-                    bounds={'._quill'}>
-          <div key="editor"
-                ref="editor"
-                className="quill-contents border_solid_top"
-                dangerouslySetInnerHTML={{__html:this.state.editorContent}} />
-        </ReactQuill>
-      </div>
-    );
-  }
-});
-~~~
 
 4. Mixing in:
 
-    ~~~jsx
-    var MyComponent = React.createClass({
-      mixins: [ ReactQuill.Mixin ],
-
-      componentDidMount: function() {
-        var editor = this.createEditor(
-          this.getEditorElement(),
-          this.getEditorConfig()
-        );
-        this.setState({ editor:editor });
-      },
-
-      componentWillReceiveProps: function(nextProps) {
-        if ('value' in nextProps && nextProps.value !== this.props.value) {
-          this.setEditorContents(this.state.editor, nextProps.value);
-        }
-      },
-
-      /* ... */
-    });
-    ~~~
+    Use mix-ins to extend the functionality of Sh-Quill from the pre-built Quill mix-ins 
 
     See [component.js](src/component.js) for a fully fleshed-out example.
 
 
 Styles and themes
 -----------------
+As a default setting Sh-Quill comes with the Quill theme _snow_ set as default.  
+
+
 The Quill editor supports themes.
 
 It includes a full-fledged theme, called _snow_, that is Quill's standard appearance, and a _base_ theme containing only the bare essentials to allow modules like toolbars or tooltips to work.
 
 These stylesheets can be found in the Quill distribution, but for convenience they are also linked among React Quill's `dist`s. In a common case you would activate a theme like this:
 
-    <ReactQuill theme='snow' />
+    <ShQuill theme='snow' />
 
 And then link the appropriate stylesheet:
 
@@ -179,33 +61,11 @@ This may vary depending how application is structured, directories or otherwise.
 
 Quill will include a set of basic styles upon instantiation, so that including `quill.core.css` is not needed. If you would instead like to avoid this style injection, so to include `quill.core.css` manually or use your own styles, pass `false` (not just a _falsy_ value) as `styles`:
 
-    <ReactQuill styles={false}>
+    <ShQuill styles={false}>
 
 Otherwise, you can set this to an object containing selectors and rules, that will be injected inside the document by Quill.
 
 
-Bundling with Webpack
----------------------
-Quill ships only a pre-built javascript file, so Webpack will complain:
-
-~~~
-Error: ./~/react-quill/~/quill/dist/quill.js
-Critical dependencies:
-6:478-485 This seems to be a pre-built javascript file. Though this is possible, it's not recommended. Try to require the original source to get better results.
-@ ./~/react-quill/~/quill/dist/quill.js 6:478-485
-~~~
-
-The warning is harmless, but if you want to silence it you can avoid parsing Quill by adding this to your Webpack configuration:
-
-~~~js
-module: {
-  // Shut off warnings about using pre-built javascript files
-  // as Quill.js unfortunately ships one as its `main`.
-  noParse: /node_modules\/quill\/dist/
-}
-~~~
-
-See [#7](https://github.com/zenoamaro/react-quill/issues/7) for more details.
 
 
 API reference
@@ -213,13 +73,13 @@ API reference
 
 ### Exports
 
-`ReactQuill.Mixin`
-: Provides the bridge between React and Quill. `ReactQuill` implements this mixin; in the same way you can use it to build your own component, or replace it to implement a new core for the default component.
+`ShQuill.Mixin`
+: Provides the bridge between React and Quill. `ShQuill` implements this mixin; in the same way you can use it to build your own component, or replace it to implement a new core for the default component.
 
-`ReactQuill.Toolbar`
-: The component that renders the basic ReactQuill toolbar. The default collection of items and color swatches is available as `ReactQuill.Toolbar.defaultItems` and `ReactQuill.Toolbar.defaultColors` respectively.
+`ShQuill.Toolbar`
+: The component that renders the basic ShQuill toolbar. The default collection of items and color swatches is available as `ShQuill.Toolbar.defaultItems` and `ShQuill.Toolbar.defaultColors` respectively.
 
-`ReactQuill.Quill`
+`ShQuill.Quill`
 : The `Quill` namespace on which you can call `registerModule` and such.
 
 
@@ -244,7 +104,7 @@ API reference
 : An object specifying what modules are enabled, and their configuration. See the [modules section](http://quilljs.com/docs/modules/) over the Quill documentation for more information on what modules are available.
 
 `toolbar`
-: A list of toolbar items to use as custom configuration for the toolbar. Pass `false` to disable the toolbar completely. Defaults items are available for reference in [`ReactQuill.Toolbar.defaultItems`](src/toolbar.js#L21) and [`ReactQuill.Toolbar.defaultColors`](src/toolbar.js#L6). See also the [Toolbar module](http://quilljs.com/docs/modules/toolbar/) over the Quill documentation for more information on the inner workings.
+: A list of toolbar items to use as custom configuration for the toolbar. Pass `false` to disable the toolbar completely. Defaults items are available for reference in [`ShQuill.Toolbar.defaultItems`](src/toolbar.js#L21) and [`ShQuill.Toolbar.defaultColors`](src/toolbar.js#L6). See also the [Toolbar module](http://quilljs.com/docs/modules/toolbar/) over the Quill documentation for more information on the inner workings.
 
 `formats`
 : An array of formats to be enabled during editing. All implemented formats are enabled by default. See [Formats](http://quilljs.com/docs/formats/) for a list. Also accepts definitions of custom formats:
@@ -295,7 +155,7 @@ API reference
 
 ### Methods
 
-If you have [a ref to a ReactQuill node](https://facebook.github.io/react/docs/more-about-refs.html), you will be able to invoke the following methods:
+If you have [a ref to a ShQuill node](https://facebook.github.io/react/docs/more-about-refs.html), you will be able to invoke the following methods:
 
 `focus()`
 : Focuses the editor.
@@ -311,7 +171,7 @@ Building and testing
 --------------------
 You can run the automated test suite:
 
-    $ npm test
+    $ npm run test
 
 And build a version of the source:
 
