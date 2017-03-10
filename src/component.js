@@ -62,7 +62,8 @@ let QuillComponent = React.createClass({
             theme: 'snow',
             modules: {},
             config: {
-                insertImageWithUrl: false
+                insertImageWithUrl: false,
+                stopEventPropInDynamics: false
             }
         };
     },
@@ -136,7 +137,9 @@ let QuillComponent = React.createClass({
             if (this.props.value) {
                 this.setEditorContents(editor, this.props.value);
             }
-            this.editorSentinel();
+            if (this.props.config.stopEventPropInDynamics === true) {
+                this.editorSentinel();
+            }
         });
     },
 
