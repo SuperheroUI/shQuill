@@ -110,6 +110,16 @@ let QuillComponent = React.createClass({
         }
     },
 
+    editorSentinel: function() {
+        const DYNAMICS_URL_PATTERN = /^(.*\.)?dynamics\./;
+        if (DYNAMICS_URL_PATTERN.test(window.location)) {
+            let qlEditors = document.getElementsByClassName('ql-editor');
+            Array.prototype.forEach.call(qlEditors, function (e) {
+                e.onselectstart = (evt) => { evt.stopPropagation(); }
+            });
+        }
+    },
+
     componentDidMount: function() {
         let editor = this.createEditor(
             this.getEditorElement(),
@@ -121,7 +131,7 @@ let QuillComponent = React.createClass({
             fontOptions[i].style.fontFamily = fontOptions[i].dataset.value;
         }
 
-        this.setState({ editor:editor });
+        this.setState({ editor:editor }, this.editorSentinel);
     },
 
     componentWillUnmount: function() {
