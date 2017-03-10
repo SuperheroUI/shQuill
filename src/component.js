@@ -62,7 +62,8 @@ let QuillComponent = React.createClass({
             theme: 'snow',
             modules: {},
             config: {
-                insertImageWithUrl: false
+                insertImageWithUrl: false,
+                stopEventPropInDynamics: false
             }
         };
     },
@@ -111,6 +112,16 @@ let QuillComponent = React.createClass({
         }
     },
 
+    editorSentinel: function() {
+        const DYNAMICS_URL_PATTERN = /^(.*\.)?dynamics\./;
+        if (DYNAMICS_URL_PATTERN.test(window.location)) {
+            let qlEditors = document.getElementsByClassName('ql-editor');
+            Array.prototype.forEach.call(qlEditors, function (e) {
+                e.onselectstart = (evt) => { evt.stopPropagation(); }
+            });
+        }
+    },
+
     componentDidMount: function() {
         let editor = this.createEditor(
             this.getEditorElement(),
@@ -125,6 +136,9 @@ let QuillComponent = React.createClass({
         this.setState({ editor:editor }, () => {
             if (this.props.value) {
                 this.setEditorContents(editor, this.props.value);
+            }
+            if (this.props.config.stopEventPropInDynamics === true) {
+                this.editorSentinel();
             }
         });
     },
