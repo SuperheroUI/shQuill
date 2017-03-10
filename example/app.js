@@ -1,25 +1,32 @@
 import React from 'react'
 import ReactDOM from 'react-dom';
-import ShQuill from '../bin/sh-quill'
+import ShQuill from '../src/index'
 
 class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            reason: '<div>beginning text</div>'
+            value: '<div>beginning text</div>'
         };
 
         this.handleChange = this.handleChange.bind(this);
+        this.updateValue = this.updateValue.bind(this);
     }
 
-    handleChange() {
+    handleChange(value) {
         this.setState({
-            reason: `<ul>
-                <li>one</li>
-                <li>two</li>
-                <li>three</li>
-                <li>four</li>
-                        </ul>`
+            value: value
+        })
+    }
+
+    updateValue() {
+        this.setState({
+            value: `<ul>
+                        <li>one</li>
+                        <li>two</li>
+                        <li>three</li>
+                        <li>four</li>
+                      </ul>`
         })
     }
 
@@ -27,9 +34,16 @@ class App extends React.Component {
         return (
             <div className="">
                 <div className="example">
-                    <ShQuill className="sm" value={this.state.reason}/>
+                    <ShQuill
+                      value={this.state.value}
+                      onChange={this.handleChange}
+                      config={{
+                        insertImageWithUrl: true
+                      }}
+                      />
                 </div>
-                <button onClick={this.handleChange}>test</button>
+                <button onClick={this.updateValue}>Update Value</button>
+                <p>{this.state.value}</p>
             </div>
         )
     }
